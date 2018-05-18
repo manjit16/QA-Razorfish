@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>Test Form</h1>
+    <p>Fill the form with the following rules: </p>
+    <p>First name, last name and phone are required inputs.</p>
+    <p>Only characters are allowed for the first and last name inputs.  Max length is 20.</p>
+    <p>Phone input should match the phone number format </p>
+    
+    <form name="testForm" post>
+        <label>First Name:</label>
+        <input type="text" id="fname">
+        <p id="fname-error"></p>
+        <label>Last Name:</label>
+        <input type="text" id="lname">
+        <p id="lname-error"></p>
+        <label>Phone:</label>
+        <input type="text" id="phone">
+        <p id="phone-error"></p>
+        <button id="submit" type="button" value="Submit" onclick="return validateForm()">Submit </button>
+        <button type="button" onclick="return clearForm();">Clear Form</button>
+    </form>
+    <script>
+    var error = "";
+
+    function fnameValidation() {
+        var fname, firstNameError;
+        firstNameError = "";
+        fname = document.getElementById("fname").value;
+
+        if (fname.match(/[^a-z]/gi)) {
+            firstNameError += "First name can only be characters";
+        } else if (fname.length > 20) {
+            firstNameError += "The max length of first name is 20";
+        } else if (fname.trim()=== "") {
+            firstNameError += "First name is a required field";
+        }
+
+        document.getElementById("fname-error").innerHTML = firstNameError;
+        document.getElementById("fname-error").style.color = "Red";
+        error += firstNameError;    
+
+    };
+
+    function lnameValidation() {
+        var lname, lastNameError;
+        lname = document.getElementById("lname").value;
+        lastNameError = "";
+        if (lname.match(/[^a-z]/gi)) {
+            lastNameError += "Last name can only be characters";
+        } else if (lname.length > 20) {
+            lastNameError += "The max length of first name is 20";
+        } else if (lname.trim()==="") {
+            lastNameError += "Last name is a required field";
+        }
+
+        document.getElementById("lname-error").innerHTML = lastNameError;
+        document.getElementById("lname-error").style.color = "Red";
+        error += lastNameError;
+    };
+
+    function phoneValidation() {
+        var phone, phoneError;
+        phone = document.getElementById("phone").value;
+        phoneError = "";    
+        var test = phone.match(/^\(?([0-9]{3})\)?[\-\. ]?([0-9]{3})?[\-\.]?([0-9]{4})$/);    
+        if (phone.trim()==="") {
+            phoneError = "Phone number is a required input";
+        }else if(test===null){
+            phoneError = "Phone is incorrect";
+        }
+        document.getElementById("phone-error").innerHTML = phoneError;
+        document.getElementById("phone-error").style.color = "Red";
+        error += phoneError;
+    };
+
+    function validateForm() {        
+        this.fnameValidation();
+        this.lnameValidation();
+        this.phoneValidation();
+		
+        if (error.trim() === "") {      
+			var fname, lname, phone;
+			fname = document.getElementById("fname").value;
+			lname = document.getElementById("lname").value;
+			phone = document.getElementById("phone").value;
+           var myWindow = window.open("", "_self");
+            myWindow.document.write("<p>Form submitted!</p>"); 
+			myWindow.document.write("<label id='fname-submit'>" + fname + "</label><br>");
+			myWindow.document.write("<label id='lname-submit'>" + lname + "</label><br>");
+			myWindow.document.write("<label id='phone-submit'>" + phone + "</label><br>");
+			
+    }else{       
+		error = "";
+        //document.getElementsByTagName("p")[0].innerHTML = "Please clear the form and try again";
+    }
+};
+
+  function clearForm() {
+    window.location.reload(false); 
+}
+
+   
+    </script>
+</body>
+
+</html>

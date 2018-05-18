@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [Regression]" data-provider-thread-count="1">
+  <test name="Test(failed)">
+    <classes>
+      <class name="com.alg.test.executionengine.Executor">
+        <methods>
+          <include name="testCase" invocation-numbers="1 2 3 4 5 6 7 8 9 10 11 12 13 14"/>
+          <include name="afterClass"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="beforeClass"/>
+        </methods>
+      </class> <!-- com.alg.test.executionengine.Executor -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Regression] -->
